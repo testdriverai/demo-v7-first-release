@@ -1,0 +1,17 @@
+{
+  "name": "testdriver-vitest-example",
+  "version": "1.0.0",
+  "description": "Example project using TestDriver Vitest plugin",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  },
+  "dependencies": {
+    "testdriverai": "file:../cli/"
+  }
+}
