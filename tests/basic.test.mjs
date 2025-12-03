@@ -9,8 +9,8 @@
  */
 
 import { describe, expect, it } from "vitest";
-// Import TestDriver from the vitest integration
-import { TestDriver } from "testdriverai/vitest";
+// Import TestDriver from the vitest hooks
+import { TestDriver } from "testdriverai/vitest/hooks";
 
 describe("Google Search Example", () => {
   it("should search for TestDriver", async (context) => {

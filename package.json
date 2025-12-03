@@ -12,6 +12,7 @@
     "vitest": "^2.0.0"
   },
   "dependencies": {
-    "testdriverai": "file:../cli/"
+    "dotenv": "^17.2.3",
+    "testdriverai": "^7.1.2"
   }
 }

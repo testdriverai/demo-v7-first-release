@@ -24,7 +24,7 @@ examples/vitest-plugin/
 ├── README.md             # This file
 └── tests/
     ├── basic.test.mjs    # Simple example
-    ├── steps.test.mjs    # Step-by-step pattern (recommended)
+    ├── airbnb.test.mjs    # More complex example
     ├── lifecycle.test.mjs # Using lifecycle helpers
     └── once.test.mjs     # Using it.once() for setup
 ```
@@ -48,83 +48,3 @@ describe("My Test", () => {
   });
 });
 ```
-
-### Step-by-Step Pattern (Recommended)
-
-```javascript
-describe("Login Flow", () => {
-  it("step01: provision browser", async (context) => {
-    const testdriver = TestDriver(context);
-    await testdriver.provision.chrome({ url: "https://myapp.com/login" });
-  });
-
-  it("step02: enter username", async (context) => {
-    const testdriver = TestDriver(context);
-    const field = await testdriver.find("Username field");
-    await field.click();
-    await testdriver.type("myuser");
-  });
-
-  it("step03: enter password", async (context) => {
-    const testdriver = TestDriver(context);
-    const field = await testdriver.find("Password field");
-    await field.click();
-    await testdriver.type("mypassword", { secret: true });
-  });
-
-  it("step04: submit", async (context) => {
-    const testdriver = TestDriver(context);
-    const button = await testdriver.find("Login button");
-    await button.click();
-    await testdriver.assert("logged in successfully");
-  });
-});
-```
-
-### Running Individual Steps
-
-```bash
-# Run just step 2 (sandbox persists from previous run)
-vitest --testNamePattern "step02" tests/steps.test.mjs
-```
-
-## Available Imports
-
-```javascript
-// Core
-import { TestDriver } from "testdriverai/vitest";
-
-// Extended Vitest functions
-import { describe, it, test, expect, beforeAll, afterAll } from "testdriverai/vitest";
-
-// Lifecycle helpers
-import { 
-  launchChrome,
-  launchChromeForTesting,
-  launchChromeExtension,
-  waitForPage,
-  authDashcam,
-  startDashcam,
-  stopDashcam,
-  runPrerun,
-  runPostrun,
-} from "testdriverai/vitest";
-
-// Utility functions
-import { 
-  retryAsync,
-  setupEventLogging,
-  waitFor,
-  sleep,
-  generateTestId,
-} from "testdriverai/vitest";
-
-// Check reconnection state
-import { isReconnected, getTestDriver } from "testdriverai/vitest";
-```
-
-## Environment Variables
-
-- `TD_API_KEY` - Your TestDriver API key (required)
-- `TD_API_ROOT` - API endpoint (optional, defaults to production)
-- `TD_LOG_LEVEL` - Log level: debug, info, warn, error (optional)
